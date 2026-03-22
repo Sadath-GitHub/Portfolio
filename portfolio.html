@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohammed Sadath Khan – Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0f0d;
+      --surface: #111a15;
+      --border: #1e2e24;
+      --accent: #3effa0;
+      --accent-dim: #1a8a50;
+      --accent-glow: rgba(62, 255, 160, 0.12);
+      --text-primary: #e8f0eb;
+      --text-secondary: #7a9985;
+      --text-muted: #4a6355;
+      --tag-bg: rgba(62, 255, 160, 0.08);
+      --tag-border: rgba(62, 255, 160, 0.2);
+      --mono: 'DM Mono', monospace;
+      --display: 'Syne', sans-serif;
+      --body: 'DM Sans', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--body);
+      font-size: 16.5px;
+      line-height: 1.7;
+      overflow: hidden;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      height: 100vh;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* LEFT PANEL */
+    .left {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 64px 44px 48px;
+      border-right: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .left::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: -80px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(62, 255, 160, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .name {
+      font-family: var(--display);
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .name span {
+      color: var(--accent);
+    }
+
+    .title {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 44px;
+      max-width: 270px;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: auto;
+    }
+
+    nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 9px 12px;
+      border-radius: 4px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    nav a::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: currentColor;
+      flex-shrink: 0;
+      transition: width 0.25s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    nav a:hover::before,
+    nav a.active::before {
+      width: 40px;
+    }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 44px;
+    }
+
+    .socials a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .socials a:hover {
+      color: var(--accent);
+    }
+
+    .socials svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+    }
+
+    /* RIGHT PANEL — this is the scrolling container */
+    .right {
+      height: 100vh;
+      overflow-y: scroll;
+      padding: 64px 72px 120px;
+    }
+
+    .right::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .right::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .right::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 99px;
+    }
+
+    section {
+      margin-bottom: 100px;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* About */
+    .about-text p {
+      color: var(--text-secondary);
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 620px;
+      margin-bottom: 16px;
+    }
+
+    .about-text p strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .contact-chip {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .contact-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .contact-chip svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+    }
+
+    /* Education */
+    .edu-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .edu-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .edu-date {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      padding-top: 3px;
+      line-height: 1.6;
+    }
+
+    .edu-main h3 {
+      font-family: var(--display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .edu-main .school {
+      font-size: 13px;
+      color: var(--accent-dim);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .edu-main .gpa {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .edu-main .gpa span {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .coursework {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* Experience */
+    .exp-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 24px;
+      margin-bottom: 52px;
+      padding-bottom: 52px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .exp-date {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      padding-top: 3px;
+      line-height: 1.6;
+    }
+
+    .exp-main h3 {
+      font-family: var(--display);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .promoted {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-weight: 400;
+    }
+
+    .exp-main .company {
+      font-size: 13px;
+      color: var(--accent-dim);
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+
+    .exp-main .location {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+
+    .exp-main .desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.7;
+      max-width: 580px;
+    }
+
+    .bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .bullets li {
+      font-size: 15px;
+      color: var(--text-secondary);
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.75;
+      max-width: 580px;
+    }
+
+    .bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 10px;
+      top: 6px;
+    }
+
+    .bullets li strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      padding: 4px 10px;
+      border-radius: 3px;
+    }
+
+    /* Projects */
+    .proj-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .proj-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px;
+      transition: border-color 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .proj-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .proj-card:hover {
+      border-color: rgba(62, 255, 160, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .proj-card:hover::before {
+      opacity: 1;
+    }
+
+    .proj-card h3 {
+      font-family: var(--display);
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .proj-card h3 a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .proj-card h3 a:hover {
+      color: var(--accent);
+    }
+
+    .proj-card p {
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 8px;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .skill-row {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 18px 22px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    .skill-cat {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 4px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .footer {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        overflow: auto;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .left {
+        height: auto;
+        padding: 40px 28px 28px;
+      }
+
+      .right {
+        height: auto;
+        overflow-y: visible;
+        padding: 40px 28px 80px;
+      }
+
+      .proj-grid,
+      .exp-item,
+      .edu-item {
+        grid-template-columns: 1fr;
+      }
+
+      .skill-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+
+    <!-- LEFT -->
+    <aside class="left">
+      <h1 class="name">Mohammed<br><span>Sadath Khan</span></h1>
+      <p class="title">Software Engineer</p>
+      <p class="tagline">I build scalable systems with a mindset for architecture and a heart for users</p>
+
+      <nav id="main-nav">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+      </nav>
+
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/mohammed-sadath-khan-328188137/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+          </svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/Sadath-GitHub" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+          </svg>
+          GitHub
+        </a>
+        <a href="mailto:mohammedsadathkhan123@gmail.com">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+          </svg>
+          Email
+        </a>
+        <a href="https://leetcode.com/u/Mohammed_Sadath_Khan/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z" />
+          </svg>
+          LeetCode
+        </a>
+      </div>
+    </aside>
+
+    <!-- RIGHT -->
+    <main class="right" id="right-panel">
+
+      <section id="about">
+        <p class="section-label">About</p>
+        <div class="about-text reveal">
+          <p>Hey! I'm Mohammed — a <strong>software engineer</strong> with 5+ years of industry experience building
+            high-throughput distributed systems, and currently pursuing my <strong>MS in Computer Science</strong> at
+            the University of Arkansas at Little Rock (GPA 4.0).</p>
+          <p>My career spans <strong>Yubi</strong>, <strong>Flipkart</strong>, and <strong>DXC Technology</strong>,
+            where I've worked across payments infrastructure, notification systems, vendor failover, and large-scale
+            Kubernetes migrations. I'm drawn to the intersection of <strong>systems engineering and AI</strong> —
+            building pipelines that are both reliable at scale and intelligent at the edge.</p>
+          <p>I enjoy competitive problem-solving and exploring GenAI tooling. I'm based in <strong>Little Rock,
+              Arkansas</strong> and open to new opportunities.</p>
+          <div class="contact-row">
+            <a class="contact-chip" href="mailto:mohammedsadathkhan123@gmail.com">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+              </svg>
+              mohammedsadathkhan123@gmail.com
+            </a>
+            <a class="contact-chip" href="tel:8703952984">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+              </svg>
+              (870) 395-2984
+            </a>
+            <span class="contact-chip">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+              </svg>
+              Little Rock, AR
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section id="education">
+        <p class="section-label">Education</p>
+        <div class="edu-item reveal">
+          <div class="edu-date">Aug 2025<br>→ May 2027</div>
+          <div class="edu-main">
+            <h3>MS in Computer Science</h3>
+            <div class="school">University of Arkansas at Little Rock</div>
+            <div class="gpa">GPA: <span>4.0 / 4.0</span> · Graduate Research Assistant</div>
+            <div class="coursework">
+              <span class="tag">Software Engineering</span>
+              <span class="tag">Artificial Intelligence</span>
+              <span class="tag">Advanced Algorithms</span>
+              <span class="tag">Database Systems</span>
+              <span class="tag">Networking</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience">
+        <p class="section-label">Experience</p>
+
+        <div class="exp-item reveal">
+          <div class="exp-date">Apr 2025<br>→ Aug 2025</div>
+          <div class="exp-main">
+            <h3>Lead Engineer <span class="promoted">↑ Promoted</span></h3>
+            <div class="company">Yubi</div>
+            <div class="location">Hyderabad, India</div>
+            <div class="desc">Gateway team for all third-party integrations — KYC, notifications, and payments. Led
+              end-to-end feature delivery from design to deployment, representing the team in cross-functional
+              discussions.</div>
+            <ul class="bullets">
+              <li>Led migration of the Central Notification Service from <strong>Golang → Java</strong>, consolidating
+                email, SMS &amp; WhatsApp into a single microservice; eliminated AWS Lambda and streamlined
+                architecture, cutting overall cost by <strong>25%</strong></li>
+              <li>Developed a push notification framework via <strong>Google Firebase SDK</strong> — enabling
+                <strong>500K+ targeted push notifications/month</strong> and boosting field-agent productivity by
+                <strong>50%</strong>
+              </li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Java</span><span class="tag">Golang</span><span class="tag">Spring Boot</span>
+              <span class="tag">Firebase SDK</span><span class="tag">Kafka</span><span class="tag">Redis</span>
+              <span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">Temporal</span><span
+                class="tag">AWS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-date">Jan 2023<br>→ Apr 2025</div>
+          <div class="exp-main">
+            <h3>Senior Software Engineer</h3>
+            <div class="company">Yubi</div>
+            <div class="location">Hyderabad, India</div>
+            <ul class="bullets">
+              <li>Built an async bulk-file processing framework on <strong>Temporal</strong> with configurable per-row
+                tasks and worker resiliency — drove <strong>$50K/month revenue</strong> and earned the Excellence
+                Superstar Award</li>
+              <li>Designed a real-time vendor failover system using <strong>Redis sorted sets</strong> with
+                <strong>PostgreSQL</strong> persistence, continuously re-ranking vendors on live failure metrics
+              </li>
+              <li>Built a dynamic routing layer enabling on-demand switching from self-hosted Temporal to Temporal
+                Cloud, improving scalability and reducing downtime</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Java</span><span class="tag">Golang</span><span class="tag">Spring Boot</span>
+              <span class="tag">Kafka</span><span class="tag">Redis</span><span class="tag">PostgreSQL</span>
+              <span class="tag">MongoDB</span><span class="tag">Temporal</span><span class="tag">AWS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-date">Dec 2021<br>→ Jan 2023</div>
+          <div class="exp-main">
+            <h3>Software Development Engineer</h3>
+            <div class="company">Flipkart · Ekart Payments</div>
+            <div class="location">Remote, India</div>
+            <ul class="bullets">
+              <li>Built a Payments Shipment Monitoring Dashboard surfacing payment modes, vendor details, and refund
+                status — reduced on-call debugging time significantly</li>
+              <li>Implemented a write-off flow for unrecoverable wallet reconciliation, led API contract discussions and
+                backend development end-to-end</li>
+              <li>Directed migration of payment services from VMs to <strong>Kubernetes</strong>; led <strong>NFR load
+                  testing with JMeter</strong> for Big Billion Days, contributing to <strong>$1 billion in
+                  sales</strong>. Received the Team Player Award</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Kafka</span>
+              <span class="tag">Redis</span><span class="tag">MySQL</span><span class="tag">Kubernetes</span>
+              <span class="tag">JMeter</span><span class="tag">NFR Testing</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-date">Jun 2020<br>→ Dec 2021</div>
+          <div class="exp-main">
+            <h3>Associate Software Engineer</h3>
+            <div class="company">DXC Technology</div>
+            <div class="location">Remote, India</div>
+            <ul class="bullets">
+              <li>Developed and customised Microsoft Dynamics 365 applications using JavaScript, enhancing UI and
+                functionality</li>
+              <li>Managed scheduling and execution of background jobs with SAP tools, reducing job failures and
+                increasing system uptime</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">JavaScript</span><span class="tag">MS Dynamics 365</span><span class="tag">SAP</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <p class="section-label">Projects</p>
+        <div class="proj-grid">
+          <div class="proj-card reveal">
+            <h3>
+              Document Ingestion &amp; RAG Pipeline
+              <a href="https://github.com/Sadath-GitHub" target="_blank" rel="noopener" title="GitHub">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path
+                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                </svg>
+              </a>
+            </h3>
+            <p>Ingestion pipeline with sentence-aware chunking (overlap for context), embedding generation, and Pinecone
+              vector storage for RAG retrieval — reduces hallucinations by maintaining cross-chunk context.</p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">RAG</span><span class="tag">Embeddings</span><span class="tag">LangChain</span>
+            </div>
+          </div>
+
+          <div class="proj-card reveal">
+            <h3>
+              Incident Risk Assessment
+              <a href="https://github.com/Sadath-GitHub" target="_blank" rel="noopener" title="GitHub">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path
+                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                </svg>
+              </a>
+            </h3>
+            <p>Deployment risk assessment pipeline using LangGraph to analyze code changes against historical incidents
+              in a vector DB. Auto-flags risky changes through structured, deterministic workflows.</p>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">LangGraph</span>
+              <span class="tag">Vector DB</span><span class="tag">LLMs</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <p class="section-label">Skills</p>
+        <div class="skills-grid">
+          <div class="skill-row reveal">
+            <div class="skill-cat">Languages</div>
+            <div class="skill-tags">
+              <span class="tag">Java</span><span class="tag">Python</span>
+              <span class="tag">Golang</span><span class="tag">C++</span>
+            </div>
+          </div>
+          <div class="skill-row reveal">
+            <div class="skill-cat">Frameworks</div>
+            <div class="skill-tags">
+              <span class="tag">Spring Boot</span><span class="tag">FastAPI</span>
+            </div>
+          </div>
+          <div class="skill-row reveal">
+            <div class="skill-cat">Messaging &amp; Workflow</div>
+            <div class="skill-tags">
+              <span class="tag">Kafka</span><span class="tag">Temporal</span><span class="tag">Redis</span>
+            </div>
+          </div>
+          <div class="skill-row reveal">
+            <div class="skill-cat">Databases</div>
+            <div class="skill-tags">
+              <span class="tag">PostgreSQL</span><span class="tag">MySQL</span>
+              <span class="tag">MongoDB</span><span class="tag">Pinecone</span>
+            </div>
+          </div>
+          <div class="skill-row reveal">
+            <div class="skill-cat">Infra &amp; Cloud</div>
+            <div class="skill-tags">
+              <span class="tag">AWS</span><span class="tag">Kubernetes</span>
+              <span class="tag">Docker</span><span class="tag">Firebase</span><span class="tag">Git</span>
+            </div>
+          </div>
+          <div class="skill-row reveal">
+            <div class="skill-cat">Testing</div>
+            <div class="skill-tags">
+              <span class="tag">JMeter</span><span class="tag">NFR Testing</span><span class="tag">Unit Testing</span>
+            </div>
+          </div>
+          <div class="skill-row reveal">
+            <div class="skill-cat">AI / GenAI</div>
+            <div class="skill-tags">
+              <span class="tag">LLMs</span><span class="tag">RAG</span>
+              <span class="tag">Embeddings</span><span class="tag">LangGraph</span><span class="tag">LangChain</span>
+            </div>
+          </div>
+          <div class="skill-row reveal">
+            <div class="skill-cat">Core CS</div>
+            <div class="skill-tags">
+              <span class="tag">DSA</span><span class="tag">Low-Level Design</span>
+              <span class="tag">High-Level Design</span><span class="tag">OOP</span>
+              <span class="tag">Design Patterns</span><span class="tag">Agile</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">© 2026 Mohammed Sadath Khan All rights reserved.</div>
+    </main>
+  </div>
+
+  <script>
+    const panel = document.getElementById('right-panel');
+    const sections = Array.from(document.querySelectorAll('#right-panel section[id]'));
+    const links = Array.from(document.querySelectorAll('#main-nav a'));
+
+    // Clicking a nav link → scroll the right panel to that section
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const id = link.getAttribute('href').replace('#', '');
+        const el = document.getElementById(id);
+        if (el) {
+          panel.scrollTo({ top: el.offsetTop - 48, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // As user scrolls, highlight the matching nav link
+    panel.addEventListener('scroll', () => {
+      const pos = panel.scrollTop + 100;
+      let active = sections[0].id;
+      sections.forEach(s => { if (s.offsetTop <= pos) active = s.id; });
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active));
+    }, { passive: true });
+
+    // Initial highlight
+    links[0] && links[0].classList.add('active');
+
+    // Scroll-reveal: use the right panel as the IntersectionObserver root
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { root: panel, threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+
+</html>
